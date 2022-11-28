@@ -1,0 +1,43 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav {
+    background: linear-gradient(rgba(169, 169, 169, 0.052), rgba(255,0,0,0)) ;
+    margin: 0pm;
+    padding: 0;
+    height: 80px;
+
+}
+
+nav h1 {
+    color: red;
+    display: inline-block;
+    width: 50%;
+    margin: 0;
+    padding: 5px;
+}
+
+nav p{
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+    cursor: pointer;
+}
+
+nav p :hover{
+    color: blue
+}
+
+section {
+    padding: 5px;
+    margin: 5px;
+}
+
+.section p {
+    display: inline-block;
+}
