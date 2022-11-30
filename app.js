@@ -94,23 +94,35 @@ function bestMovie() {
 })
 }
 
-function bestMovies() {
-    fetchCheckServer("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score")
-    .then(function (data){
-        let bestMovies = document.querySelector("#bestMovies")
-        for (let i =0; i < 5; i++) {
+function getUrlmovie(data, moviesNumber) {
+    let moviesImgUrl= Array()
+        for (let i =0; i < moviesNumber; i++) {
             let bestMovieUrl = data.results[i].url
             fetchCheckServer(bestMovieUrl)
             .then(function (data) {
-                let movieImage= document.createElement("p");
-                bestMovies.innerHTML = "<img src="+ data.image_url + ">";
-                bestMovies.append(movieImage)
-        })}
-    })
-           
+                let movieImgUrl = data.image_url
+                moviesImgUrl.push(movieImgUrl)})}
+    return moviesImgUrl
+}
+
+function getMoviesImgUrl() {
+    fetchCheckServer("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score")
+    
+    .then(function (data){
+        let moviesImgUrl= Array()
+        let urlMovies1 = getUrlmovie(data, 5)
+        moviesImgUrl.push(urlMovies1)
+        let nextPageUrl = data.next
+        fetchCheckServer(nextPageUrl)
+        .then(function(data){
+            let urlMovies2 = getUrlmovie(data, 2)
+            moviesImgUrl.push(urlMovies2)
+            })
+        console.log(moviesImgUrl)
+    })     
     
 }
 
 bestMovie()
-bestMovies()
+getMoviesImgUrl()
 
