@@ -4,40 +4,141 @@ body {
     background-color: black;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
+    text-align: justify;
 }
-
+h2 {
+    margin-left: 5px;
+    font-size: 30px;
+}
+b {
+    color: rgb(167, 2, 2);
+}
+/* Navigation*/
 nav {
     background: linear-gradient(rgba(169, 169, 169, 0.052), rgba(255,0,0,0)) ;
-    margin: 0pm;
+    margin-top: 5px;
+    margin-left: 5px;
     padding: 0;
-    height: 80px;
+    height: 40px;
 
 }
 
 nav h1 {
-    color: red;
+    color:rgb(167, 2, 2);
     display: inline-block;
     width: 50%;
     margin: 0;
     padding: 5px;
 }
 
-nav p{
+.navigation{
     display: inline-block;
     margin: 0;
     padding: 5px;
     cursor: pointer;
 }
 
-nav p :hover{
-    color: blue
+.navigation:hover {
+    color: rgb(167, 2, 2);
+    font-size: large;
+  }
+
+/* Section Best Movie*/
+#bestMovie {
+    position: relative;
+    padding-left: 15px;
+    height: 500px;
+    background-size: cover;
+    background-repeat: repeat;
+    object-fit: cover;
 }
 
-section {
+#bestMovieInfos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-top: 200px;
+    width: 500px;
+}
+
+#bestMovieTitle {
+    width: 100%;
+    color: white;
+    font-size: 40px;
+    margin: 0px;
+    text-align: center;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: right;
+}
+
+
+#btnBestMovie {
+    display: flex;
+    justify-content: center;
+    align-items: right;
+    background-color: rgba(0, 0, 0, 0.454);
+    border-radius: 90px;
+    border: 4px double rgb(167, 2, 2);;
+    color: rgb(167, 2, 2);;
+    text-align: center;
+    font-size: 20px;
     padding: 5px;
+    width: 100px;
+    cursor: pointer;
     margin: 5px;
 }
 
-.section p {
-    display: inline-block;
+#btnBestMovie:hover {
+    background-color: rgba(254, 2, 2, 0.15);
+  }
+
+#bestMovieDescription {
+    text-align: center;
+    padding-top: 10px;
+    margin: 0;
+    width: 500px;
+    font-size: 20px;
 }
+
+/* The Modal (background) */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color:black;
+    margin: 5% auto; 
+    padding: 20px;
+    width: 40%; 
+    border: 1px solid rgb(167, 2, 2);;
+  }
+  
+  /* The Close Button */
+  .close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: rgb(167, 2, 2);;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
