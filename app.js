@@ -95,7 +95,7 @@ function bestMovie() {
 }
 
 function getUrlmovie(data, moviesNumber) {
-    let moviesImgUrl= Array()
+    let moviesImgUrl= []
         for (let i =0; i < moviesNumber; i++) {
             let bestMovieUrl = data.results[i].url
             fetchCheckServer(bestMovieUrl)
@@ -107,9 +107,8 @@ function getUrlmovie(data, moviesNumber) {
 
 function getMoviesImgUrl() {
     fetchCheckServer("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score")
-    
     .then(function (data){
-        let moviesImgUrl= Array()
+        let moviesImgUrl= []
         let urlMovies1 = getUrlmovie(data, 5)
         moviesImgUrl.push(urlMovies1)
         let nextPageUrl = data.next
@@ -118,11 +117,12 @@ function getMoviesImgUrl() {
             let urlMovies2 = getUrlmovie(data, 2)
             moviesImgUrl.push(urlMovies2)
             })
-        console.log(moviesImgUrl)
+        return moviesImgUrl
     })     
     
 }
 
 bestMovie()
-getMoviesImgUrl()
+let moviesImgUrl = getMoviesImgUrl()
+console.log(moviesImgUrl)
 
