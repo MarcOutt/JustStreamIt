@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>JustStreamIt</title>
-    <script src="./app.js" type="module"></script>
+    <script src="./app.js" async></script>
 
 </head>
 <body>
@@ -32,11 +32,32 @@
 
         <!--SECTION : Les meilleurs films-->
         <h2>Les meilleurs films</h2>
-        <div id="bestMovies">
+
+        <div id="bestMovies" class=" carousel1">
         </div>
         <!--SECTION : Les meilleurs films-->
 
     </section>
+
+    <section class="slider-wrapper">
+        <button class="slide-arrow" id="slide-arrow-prev">
+          &#8249;
+        </button>
+        <button class="slide-arrow" id="slide-arrow-next">
+          &#8250;
+        </button>
+        <ul class="slides-container" id="slides-container">
+          <li class="slide"></li>
+          <li class="slide"></li>
+          <li class="slide"></li>
+          <li class="slide"></li>
+          <li class="slide"></li>
+          <li class="slide"></li>
+          <li class="slide"></li>
+
+        </ul>
+      </section>
+
 
     <!-- The Modal -->
     <div id="myModal" class="modal">

@@ -6,9 +6,9 @@ async function fetchCheckServer(url) {
     throw new Error('impossible de contacter le serveur')
 }
 
-function modalInfosMovie(url) {
+function modalInfosMovie(url, className) {
     var modal = document.getElementById("myModal");
-    var btn = document.getElementById("btnBestMovie");
+    var btn = document.querySelector(className);
     var span = document.getElementsByClassName("close")[0];
     btn.onclick = function() {
         modal.style.display = "block";
@@ -89,40 +89,52 @@ function bestMovie() {
     .then(function (data) {
         let bestMovieUrl = data.results[0].url;
         bestMovieInformation(bestMovieUrl);
-        modalInfosMovie(bestMovieUrl);
+        modalInfosMovie(bestMovieUrl, "#btnBestMovie");
         
 })
 }
 
-function getUrlmovie(data, moviesNumber) {
-    let moviesImgUrl= []
-        for (let i =0; i < moviesNumber; i++) {
-            let bestMovieUrl = data.results[i].url
-            fetchCheckServer(bestMovieUrl)
-            .then(function (data) {
-                let movieImgUrl = data.image_url
-                moviesImgUrl.push(movieImgUrl)})}
-    return moviesImgUrl
-}
-
-function getMoviesImgUrl() {
+function bestMovies() {
     fetchCheckServer("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score")
     .then(function (data){
-        let moviesImgUrl= []
-        let urlMovies1 = getUrlmovie(data, 5)
-        moviesImgUrl.push(urlMovies1)
-        let nextPageUrl = data.next
-        fetchCheckServer(nextPageUrl)
-        .then(function(data){
-            let urlMovies2 = getUrlmovie(data, 2)
-            moviesImgUrl.push(urlMovies2)
-            })
-        return moviesImgUrl
-    })     
-    
+        let bestMovies = document.querySelector(".slides-container");
+        for (let i =0; i < 5; i++) {
+            let bestMovieUrl = data.results[i].url;
+            fetchCheckServer(bestMovieUrl)
+            .then(function (data) {
+                let li = document.querySelectorAll('li')[i]
+                li.innerHTML = "<img src="+ data.image_url + ">";
+            modalInfosMovie(bestMovieUrl, ".slide");
+        })}
+        
+        fetchCheckServer(data.next)
+        .then(function (data){
+            for (let i =0; i < 2; i++) {
+                let bestMovieUrl = data.results[i].url;
+                fetchCheckServer(bestMovieUrl)
+                .then(function (data) {
+                    let li = document.querySelectorAll('li')[i+5]
+                    li.innerHTML = "<img src="+ data.image_url + ">";
+                    modalInfosMovie(bestMovieUrl, ".slide");
+            })}
+        } )
+    })  
 }
 
 bestMovie()
-let moviesImgUrl = getMoviesImgUrl()
-console.log(moviesImgUrl)
+bestMovies()
 
+const slidesContainer = document.getElementById("slides-container");
+const slide = document.querySelector(".slide");
+const prevButton = document.getElementById("slide-arrow-prev");
+const nextButton = document.getElementById("slide-arrow-next");
+
+nextButton.addEventListener("click", () => {
+  const slideWidth = slide.clientWidth;
+  slidesContainer.scrollLeft += slideWidth;
+});
+
+prevButton.addEventListener("click", () => {
+  const slideWidth = slide.clientWidth;
+  slidesContainer.scrollLeft -= slideWidth;
+});
