@@ -1,16 +1,18 @@
 body {
     padding: 0;
     margin: 0;
-    color: black;
+    color: rgb(255, 246, 246);
     font-family: Arial, Helvetica, sans-serif;
     text-align: justify;
+    background-color: black;
 }
 h2 {
-    margin-left: 35px;
-    font-size: 30px;
+  margin-top:50px;
+  margin-left: 305px;
+  font-size: 30px;
 }
 b {
-    color: rgb(167, 2, 2);
+    color: black;
 }
 /* Navigation*/
 nav {
@@ -97,31 +99,31 @@ nav h1 {
     color: white;
     text-align: center;
     padding-top: 10px;
-    margin: 0;
+    margin: 15px;
     width: 500px;
     font-size: 20px;
 }
 
 /* The Modal (background) */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.4); 
+  color: white;
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4); 
   }
   
   /* Modal Content/Box */
   .modal-content {
-    background-color:black;
+    background-color:rgb(79, 79, 79);
     margin: 5% auto; 
     padding: 20px;
     width: 40%; 
-    border: 1px solid rgb(167, 2, 2);;
   }
   
   /* The Close Button */
@@ -140,69 +142,75 @@ nav h1 {
   }
 
 /* Carousel */
-.slider-wrapper {
+.carouselMovie{
+  margin:0;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin: 1rem;
+  flex-wrap: wrap;
+}
+.carousel{
+  width: 1400px;
+  height: 400px;
+  box-shadow: 0 0 14 px rgba(0, 0, 0, 0.);
   position: relative;
   overflow: hidden;
 }
 
-.slides-container {
-  height: 25%;
-  width: 80%;
-  display: flex;
-  overflow: hidden;
-  scroll-behavior: smooth;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.switchLeft,
+.switchRight{
+  color: white;
+  background-color: none;
+  font-weight: bold;
+  line-height: 350px;
+  font-size: 50px;
+  text-align: center;
+  font-family: sans-serif;
+  top:0;
+  z-index: 3;
+  cursor:pointer
 }
 
-.slide-arrow {
+.switchLeft{
   position: absolute;
+  left: 0px;
+  
+}
+
+.switchRight{
+  position: absolute;
+  right: 30px;
+}
+
+.switchLeft:hover,
+.switchRight:hover{
+  color: red;
+}
+
+.container{
+  height:400px;
+  width: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  text-align: center;
+  padding-bottom: 10 !important;
   display: flex;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  height: 4rem;
-  background-color: white;
-  border: none;
-  width: 2rem;
-  font-size: 3rem;
-  padding: 0;
+  align-items: center;
+}
+
+.photo{
+  min-width: 200px;
+  max-width: 200px;
+  height:300px;
+  margin: 5px 70px;
   cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 100ms;
+  background-size: cover;
+  transition: 0.5s ease;
+  z-index:2;
 }
 
-.slide-arrow:hover,
-.slide-arrow:focus {
-  opacity: 1;
-}
-
-#slide-arrow-prev {
-  left: 0;
-  padding-left: 0.25rem;
-  border-radius: 0 2rem 2rem 0;
-}
-
-#slide-arrow-next {
-  right: 0;
-  padding-left: 0.75rem;
-  border-radius: 2rem 0 0 2rem;
-}
-
-.slide {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 30%;
-  flex: 1 0 25%;
-  margin: 5px;
-  cursor: pointer;
-}
-
-img {
-    cursor: pointer;
+.photo:hover {
+  transform: scale(1.3);
+  z-index:5;
 }

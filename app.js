@@ -122,19 +122,48 @@ function bestMovies() {
 }
 
 bestMovie()
-bestMovies()
 
-const slidesContainer = document.getElementById("slides-container");
-const slide = document.querySelector(".slide");
-const prevButton = document.getElementById("slide-arrow-prev");
-const nextButton = document.getElementById("slide-arrow-next");
+document.body.onload=function(){
+    nbr = 5;
+    p = 0;
+    container = document.querySelector(".container");
+    container.style="width"
+    left = document.querySelector(".switchLeft");
+    right = document.querySelector(".switchRight");
+    container.style.width=(800*nbr)+"px";
+    fetchCheckServer("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score")
+    .then(function (data){
+        for (i=0;i<5;i++){
+            urlImage = data.results[i].image_url
+            div=document.createElement("div")
+            div.style.backgroundImage="url("+ urlImage + ")";
+            div.className="photo";
+            container.appendChild(div);
+            console.log(div);
+        }
+        fetchCheckServer(data.next)
+        .then(function (data){
+            for (i=0;i<2;i++){
+                urlImage = data.results[i].image_url
+                div=document.createElement("div")
+                div.style.backgroundImage="url("+ urlImage + ")";
+                div.className="photo";
+                container.appendChild(div);
+                console.log(div);
+            }
+        })
+    })
+    right.onclick=function(){
+        if (p>-nbr+2)
+            p--;
+            container.style.transform="translate("+p*340+"px)";
+            container.style.transition="all 0.5s ease";
+    }
 
-nextButton.addEventListener("click", () => {
-  const slideWidth = slide.clientWidth;
-  slidesContainer.scrollLeft += slideWidth;
-});
-
-prevButton.addEventListener("click", () => {
-  const slideWidth = slide.clientWidth;
-  slidesContainer.scrollLeft -= slideWidth;
-});
+    left.onclick=function(){
+        if (p<0)
+            p++;
+            container.style.transform="translate("+p*340+"px)";
+            container.style.transition="all 0.5s ease";
+    }
+}
