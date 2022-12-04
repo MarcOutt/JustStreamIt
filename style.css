@@ -8,7 +8,7 @@ body {
 }
 h2 {
   margin-top:50px;
-  margin-left: 305px;
+  margin-left: 20%;
   font-size: 30px;
 }
 b {
@@ -116,6 +116,7 @@ nav h1 {
   height: 100%; 
   overflow: auto; 
   background-color: rgba(0,0,0,0.4); 
+  z-index: 8
   }
   
   /* Modal Content/Box */
@@ -142,7 +143,7 @@ nav h1 {
   }
 
 /* Carousel */
-.carouselMovie{
+.carouselMovies{
   margin:0;
   display: flex;
   align-items: center;
@@ -199,7 +200,7 @@ nav h1 {
   align-items: center;
 }
 
-.photo{
+.imgMovie{
   min-width: 200px;
   max-width: 200px;
   height:300px;
@@ -210,7 +211,7 @@ nav h1 {
   z-index:2;
 }
 
-.photo:hover {
+.imgMovie:hover {
   transform: scale(1.3);
   z-index:5;
 }
