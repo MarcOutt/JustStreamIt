@@ -1,3 +1,5 @@
+
+/* Vérifie la connexion à l'api */
 async function fetchCheckServer(url) {
     const response = await fetch(url)
     if (response.ok === true) {
@@ -6,7 +8,9 @@ async function fetchCheckServer(url) {
     throw new Error('impossible de contacter le serveur')
 }
 
+/* Création de la fenêtre du modal */
 function modal(id){
+
     var modal = document.getElementById("myModal");
     var span = document.getElementsByClassName("close")[0];
     modal.style.display = "block"
@@ -70,7 +74,7 @@ function modal(id){
         })
     }
 
-
+    /* Récupère les infos pour la section bestMovie */
     function bestMovieInformation(url) {
         fetchCheckServer(url)
         .then(function (data) {
@@ -85,13 +89,13 @@ function modal(id){
             document.querySelector("#bestMovie").style.backgroundImage= "url("+ img + ")";
             let id = btnBestMovie.dataset.id
             btnBestMovie.addEventListener('click', () => {
-                console.log('la page est chargé');
                 modal(id);
             });
         
         })
     }
 
+    /* Lance le chargement de l'api et récupère les infos du film */
     function bestMovie() {
         fetchCheckServer("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score")
         .then(function (data) {
@@ -100,6 +104,7 @@ function modal(id){
         })
     }
 
+    /* Lance le chargement de l'api et récupère les infos des meilleurs films */
     function bestMovies() {
     fetchCheckServer("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score")
     .then(function (data){
@@ -128,60 +133,85 @@ function modal(id){
         } )
     })  
     }
+    /* Création du carousel */
+    function carousel(url, className, category){
+        let categorie = document.querySelector(className);
+        let carouselMovies = document.createElement("div");
+        carouselMovies.setAttribute("class", "carouselMovies");
+        categorie.append(carouselMovies);
 
-    function getImage(data, nbr){
-        for (i=0;i<nbr;i++){
-            urlImage = data.results[i].image_url
-            div=document.createElement("div")
-            div.style.backgroundImage="url("+ urlImage + ")";
-            div.className="imgMovie";
-            div.setAttribute("data-id", data.results[i].id);
-            container.appendChild(div);
-            let id = div.dataset.id
-            div.addEventListener('click', () => {
-                console.log('la page est chargé');
-                modal(id);
-            });
+        let carousel = document.createElement('div');
+        carousel.setAttribute("class", "carousel");
+        carouselMovies.append(carousel);
 
-        }
-    }
+        let switchLeft = document.createElement("a");
+        switchLeft.innerHTML = "<a class='switchLeft' data-position=0 data-categorie=" + category + "><</a>";
+        carousel.append(switchLeft);
 
-    function carousel(url){
+        let switchRight = document.createElement("a");
+        switchRight.innerHTML = "<a class='switchRight'data-position=0 data-categorie:" + category + ">></a>";
+        carousel.append(switchRight);
+
+        let container = document.createElement("div")
+        container.setAttribute('class', "container")
+        carousel.append(container)
+        p=0
         nbr = 5;
-        p = 0;
-        container = document.querySelector(".container");
         container.style="width"
-        left = document.querySelector(".switchLeft");
-        right = document.querySelector(".switchRight");
         container.style.width=(800*nbr)+"px";
         fetchCheckServer(url)
         .then(function (data){
-            getImage(data, 5)    
+            getImage(data, 5, container)    
             fetchCheckServer(data.next)
             .then(function (data){
-                getImage(data, 2)
+                getImage(data, 2, container)
             })
-            let btn = document.querySelector(".imgMovie");
         })
 
-        right.onclick=function(){
+        switchRight.onclick=function(){
+
             if (p>-nbr+2)
                 p--;
-                container.style.transform="translate("+p*340+"px)";
+                container.style.transform="translate("+p*350+"px)";
                 container.style.transition="all 0.5s ease";
+
         }
 
-        left.onclick=function(){
+        switchLeft.onclick=function(){
+            let p = switchLeft.getAttribute('data-position')
             if (p<0)
                 p++;
-                container.style.transform="translate("+p*340+"px)";
+                container.style.transform="translate("+p*350+"px)";
                 container.style.transition="all 0.5s ease";
+                switchLeft.dataset= p
+                switchRight.dataset= p
+    }
+}
+/* Récupère les images des films */
+function getImage(data, nbr, container){
+    for (i=0;i<nbr;i++){
+        urlImage = data.results[i].image_url
+        div=document.createElement("div")
+        div.style.backgroundImage="url("+ urlImage + ")";
+        div.className="imgMovie";
+        div.setAttribute("data-id", data.results[i].id);
+        container.appendChild(div);
+        let id = div.dataset.id
+        div.addEventListener('click', () => {
+            console.log('la page est chargé');
+            modal(id);
+        });
+
     }
 }
 
-bestMovie();
 
-carousel("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score");
+bestMovie();
+carousel("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score", "#bestMovies", 1, 0 );
+carousel("http://localhost:8000/api/v1/titles/?genre_contains=comedy&sort_by=-imdb_score", "#comedyMovies", 2, 0 );
+carousel("http://localhost:8000/api/v1/titles/?genre_contains=animation&sort_by=-imdb_score", "#animationMovies", 3 );
+carousel("http://localhost:8000/api/v1/titles/?genre_contains=action&sort_by=-imdb_score", "#actionMovies", 4 );
+
 
 
 
