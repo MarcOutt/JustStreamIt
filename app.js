@@ -155,7 +155,7 @@ function modal(id){
         let container = document.createElement("div")
         container.setAttribute('class', "container")
         carousel.append(container)
-        p=0
+
         nbr = 5;
         container.style="width"
         container.style.width=(800*nbr)+"px";
@@ -169,12 +169,13 @@ function modal(id){
         })
 
         switchRight.onclick=function(){
-
+            let p = switchLeft.dataset.position
             if (p>-nbr+2)
                 p--;
                 container.style.transform="translate("+p*350+"px)";
                 container.style.transition="all 0.5s ease";
-
+                switchLeft.dataset= p
+                switchRight.dataset= p
         }
 
         switchLeft.onclick=function(){
