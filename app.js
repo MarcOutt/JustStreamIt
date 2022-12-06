@@ -134,7 +134,7 @@ function modal(id){
     })  
     }
     /* Création du carousel */
-    function carousel(url, className, category){
+    function carousel(url, className, categoryLeft, categoryRight){
         let categorie = document.querySelector(className);
         let carouselMovies = document.createElement("div");
         carouselMovies.setAttribute("class", "carouselMovies");
@@ -145,17 +145,16 @@ function modal(id){
         carouselMovies.append(carousel);
 
         let switchLeft = document.createElement("a");
-        switchLeft.innerHTML = "<a class='switchLeft' data-position=0 data-categorie=" + category + "><</a>";
+        switchLeft.innerHTML = "<a class='switchLeft' id=" + categoryLeft + " data-position=0 id=><</a>";
         carousel.append(switchLeft);
 
         let switchRight = document.createElement("a");
-        switchRight.innerHTML = "<a class='switchRight'data-position=0 data-categorie:" + category + ">></a>";
+        switchRight.innerHTML = "<a class='switchRight'  id=" + categoryRight + " data-position=0 >></a>";
         carousel.append(switchRight);
 
         let container = document.createElement("div")
         container.setAttribute('class', "container")
         carousel.append(container)
-
         nbr = 5;
         container.style="width"
         container.style.width=(800*nbr)+"px";
@@ -167,25 +166,33 @@ function modal(id){
                 getImage(data, 2, container)
             })
         })
-
+        /*Tourne le carousel à gauche lors du clic de la souris sur la flèche */
         switchRight.onclick=function(){
-            let p = switchLeft.dataset.position
+            let right = document.getElementById(categoryRight)
+            console.log(right)
+            let left = document.getElementById(categoryLeft)
+            p = right.dataset.position
             if (p>-nbr+2)
                 p--;
                 container.style.transform="translate("+p*350+"px)";
                 container.style.transition="all 0.5s ease";
-                switchLeft.dataset= p
-                switchRight.dataset= p
+                console.log(p)
+                right.dataset.position = p
+                left.dataset.position = p
+ 
         }
-
+        /*Tourne le carousel à gauche lors du clic de la souris sur la flèche */
         switchLeft.onclick=function(){
-            let p = switchLeft.getAttribute('data-position')
+            let right = document.getElementById(categoryRight)
+            console.log(right)
+            let left = document.getElementById(categoryLeft)
+            p = right.dataset.position
             if (p<0)
                 p++;
                 container.style.transform="translate("+p*350+"px)";
                 container.style.transition="all 0.5s ease";
-                switchLeft.dataset= p
-                switchRight.dataset= p
+                right.dataset.position = p
+                left.dataset.position = p
     }
 }
 /* Récupère les images des films */
@@ -199,7 +206,6 @@ function getImage(data, nbr, container){
         container.appendChild(div);
         let id = div.dataset.id
         div.addEventListener('click', () => {
-            console.log('la page est chargé');
             modal(id);
         });
 
@@ -208,10 +214,10 @@ function getImage(data, nbr, container){
 
 
 bestMovie();
-carousel("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score", "#bestMovies", 1, 0 );
-carousel("http://localhost:8000/api/v1/titles/?genre_contains=comedy&sort_by=-imdb_score", "#comedyMovies", 2, 0 );
-carousel("http://localhost:8000/api/v1/titles/?genre_contains=animation&sort_by=-imdb_score", "#animationMovies", 3 );
-carousel("http://localhost:8000/api/v1/titles/?genre_contains=action&sort_by=-imdb_score", "#actionMovies", 4 );
+carousel("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score", "#bestMovies", "1l", "1r" );
+carousel("http://localhost:8000/api/v1/titles/?genre_contains=comedy&sort_by=-imdb_score", "#comedyMovies", "2l", "2r" );
+carousel("http://localhost:8000/api/v1/titles/?genre_contains=animation&sort_by=-imdb_score", "#animationMovies", "3l", "3r" );
+carousel("http://localhost:8000/api/v1/titles/?genre_contains=action&sort_by=-imdb_score", "#actionMovies", "4l", "4r" );
 
 
 
