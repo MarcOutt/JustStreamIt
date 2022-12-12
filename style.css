@@ -9,7 +9,6 @@ body {
 
 /* Navigation (background)*/
 nav {
-
   background-color: grey;
   margin-top: 5px;
   padding: 0;
@@ -25,7 +24,7 @@ nav h1 {
   top: 50%;
   transform: translateY(-50%);
   color: white;
-  font-size: 30px;
+  font-size: 50px;
   display: inline-block;
   width: 50%;
   margin: 0;
@@ -41,6 +40,7 @@ nav h1 {
   transform: translateY(-50%);
   color: white;
   display: inline-block;
+  font-size: 25px;
   margin: 0;
   padding: 5px;
   cursor: pointer;
@@ -48,14 +48,13 @@ nav h1 {
 
 nav h3:hover {
   color: black;
-  font-size: large;
+  font-size: 27px;
 }
 
 nav h3 {
   display: inline-block;
   padding-left: 50px;
 }
-
 
 /* Section Best Movie*/
 
@@ -78,7 +77,6 @@ b {
   height: 500px;
   margin-top: 50px;
   background-size: cover;
-  background-repeat: repeat;
   object-fit: cover;
 }
 
@@ -177,6 +175,8 @@ b {
   justify-content: center;
   flex-wrap: wrap;
 }
+
+/* Carousel (Window) */
 .carousel{
   width: 1400px;
   height: 400px;

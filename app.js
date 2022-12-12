@@ -104,35 +104,6 @@ function modal(id){
         })
     }
 
-    /* Lance le chargement de l'api et récupère les infos des meilleurs films */
-    function bestMovies() {
-    fetchCheckServer("http://localhost:8000/api/v1/titles/?sort_by=-imdb_score")
-    .then(function (data){
-        let bestMovies = document.querySelector(".slides-container");
-        for (let i =0; i < 5; i++) {
-            let bestMovieUrl = data.results[i].url;
-            fetchCheckServer(bestMovieUrl)
-            .then(function (data) {
-                let li = document.querySelectorAll('li')[i]
-                li.innerHTML = "<img src="+ data.image_url + ">";
-            modalInfosMovie(bestMovieUrl, ".slide");
-            })
-        }
-        
-        fetchCheckServer(data.next)
-        .then(function (data){
-            for (let i =0; i < 2; i++) {
-                let bestMovieUrl = data.results[i].url;
-                fetchCheckServer(bestMovieUrl)
-                .then(function (data) {
-                    let li = document.querySelectorAll('li')[i+5]
-                    li.innerHTML = "<img src="+ data.image_url + ">";
-                    modalInfosMovie(bestMovieUrl, ".slide");
-                })
-            }
-        } )
-    })  
-    }
     /* Création du carousel */
     function carousel(url, className, categoryLeft, categoryRight){
         let categorie = document.querySelector(className);
