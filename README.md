@@ -16,7 +16,7 @@
 
 ## Introduction
 
-JustStreamIt est une application web développée pour l'association cinématographique "nom de l'association". Elle permet à ses abonnés de visualiser en temps réel un classement de films intéressants, en se basant sur les données provenant de l'API OCMovies.
+JustStreamIt est une application web développée pour une association cinématographique. Elle permet à ses abonnés de visualiser en temps réel un classement de films intéressants, en se basant sur les données provenant de l'API OCMovies.
 
 ## Technologies utilisées
 
