@@ -32,7 +32,7 @@ JustStreamIt est une application web développée pour une association cinémato
 
 ### 1. Télécharger le projet sur votre répertoire local : 
 ```
-git clone https://github.com/MarcOutt/OC_p6.git
+git clone https://github.com/MarcOutt/JustStreamIt.git
 ```
 ### 2. Mettre en place un environnement virtuel :
 * Créer l'environnement virtuel: `python -m venv venv`
